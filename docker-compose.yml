@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    #command: gunicorn bookstore_project.wsgi -b 0.0.0.0:8000
+    environment:
+      - ENVIRONMENT=development
+      - SECRET_KEY='if==ln-j0afenv#84)5^-4lj-h=5avw09s&xj38*l8%ksyjx#i'
+      - DEBUG=1
+    #   - EMAIL_HOST_PASSWORD=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
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:
