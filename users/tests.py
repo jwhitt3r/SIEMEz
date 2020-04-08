@@ -3,8 +3,6 @@ from django.test import TestCase
 from django.urls import reverse, resolve 
 
 
-
-
 class CustomUserTests(TestCase):
 
     def test_create_user(self):

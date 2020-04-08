@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block title %}Search{% endblock title%}
+
+{% block content %}
+<div class="container">
+        <h2><a href="{% url "event"%}">Return to Events</a></h2>
+        {% for event in event_list %}
+        <div class="w-100">
+            <div class="col">
+                <div class="accordion" id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse{{ event.id }}" aria-expanded="false"
+                                    aria-controls="collapse{{ event.id }}">
+                                    {{ event.receivedat }} - {{ event.fromhost }}
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapse{{ event.id }}" class="collapse " aria-labelledby="headingOne">
+                            <div class="card-body">
+                                {{ event.message }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

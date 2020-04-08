@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+
+{% block title %}Search{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="form-inline mt-2 mt-md-0" action="{% url "search_event" %}" method="GET">
+                <div class="form-group">
+                    <label for="hostname">Search Host</label>
+                    <input name="hostname" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                        id="hostname">
+                </div>
+                <!-- <div class="form-group">
+                    <label for="message">Search Event Message</label>
+                    <input name="message" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                        id="message">
+                </div>
+                <div class="form-group">
+                    <label for="syslogtag">Search Syslogtag</label>
+                    <input name="syslogtag" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                        id="syslogtag">
+                </div>
+                <div class="form-group">
+                    <label for="eventsource">Search Event Source</label>
+                    <input name="eventsource" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                        id="eventsource">
+                </div> -->
+            </form>
+        </div>
+        {% for event in event_list %}
+        <div class="w-100">
+            <div class="col">
+                <div class="accordion" id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse{{ event.id }}" aria-expanded="false"
+                                    aria-controls="collapse{{ event.id }}">
+                                    {{ event.receivedat }} - {{ event.fromhost }}
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapse{{ event.id }}" class="collapse " aria-labelledby="headingOne">
+                            <div class="card-body">
+                                {{ event.message }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
