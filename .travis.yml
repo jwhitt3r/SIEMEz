@@ -16,5 +16,5 @@ install:
 
 
 before_script:
-    - docker-compose -d --build
+    - docker-compose up -d --build
     - python manage.py test
