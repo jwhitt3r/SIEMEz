@@ -1,14 +1,10 @@
 language: python
 matrix:
     include:
-        - "3.5"
-        - "3.6"
-        - "3.7"
         - "3.8"
 
 services:
     - docker
-    - postgresql
 
 install:
     - pip install pipenv
@@ -17,4 +13,4 @@ install:
 
 before_script:
     - docker-compose up -d --build
-    - python manage.py test
+    - docker-compose exec web python manage.py test
