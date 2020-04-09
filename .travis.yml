@@ -1,0 +1,16 @@
+language: python
+    python:
+        - "3.5"
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        
+    services:
+        - postgresql
+
+    install:
+        - pip install pipenv
+        - pipenv install
+
+    before_script:
+        - python manage.py test
