@@ -6,12 +6,12 @@ matrix:
         - "3.7"
         - "3.8"
 
-    services:
-        - postgresql
+services:
+    - postgresql
 
-    install:
-        - pip install pipenv
-        - pipenv install
+install:
+    - pip install pipenv
+    - pipenv install
 
-    before_script:
-        - python manage.py test
+before_script:
+    - python manage.py test
