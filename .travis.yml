@@ -7,11 +7,14 @@ matrix:
         - "3.8"
 
 services:
+    - docker
     - postgresql
 
 install:
     - pip install pipenv
     - pipenv install
 
+
 before_script:
+    - docker-compose -d --build
     - python manage.py test
