@@ -3,5 +3,54 @@
 {% block title %}Homepage{% endblock title%}
 
 {% block content %}
-<h1>HomePage</h1>
+<div class="jumbotron">
+    <h1 class="display-4">HomePage</h1>
+    <hr class="my-4">
+    <p>SIEMEz is a truely free security solution that allows anyone the ability to deploy their own Security Incident
+        and Event Management System.
+        SIEMEz allows for the ingestion of Syslog content which can then be searched and analysed. The aim of the
+        project is to allow for easy integration of devops, machine learning and advanced automation. </p>
+    <h1 id="motivation">Motivation</h1>
+    <p>While there are several SIEM solutions available, many require enterprise licensing to utilise effectively.
+        The annoyance of enterprise licensing for user management, or even dashboarding and the lack of further
+        integration of other areas of computing has led
+        to the creation of this project. Security for hobbyists, small- medium, and large businesses should not be held
+        ransom to enterpirsing licensing.</p>
+    <h1 id="build-status">Build status</h1>
+    <p>Build status from TravisCI
+        <a href="https://travis-ci.com/github/jwhitt3r/SIEMEz"><img
+                src="https://img.shields.io/travis/TheAlgorithms/Python.svg?label=Travis%20CI&amp;logo=travis&amp;style=flat-square"
+                alt="Build Status"></a></p>
+    <h1 id="code-style">Code style</h1>
+    <p>This project follows the standard styling of <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> </p>
+    <h1 id="screenshots">Screenshots</h1>
+    <p>These will be added as the project progresses.</p>
+    <h1 id="framework">Framework</h1>
+    <p>The core of SIEMEz is the Django framework, with its maturity in the web development world, coupled with the
+        flexibility of Python, allows anyone to extend SIEMEz.
+        In addition, the pipenv virtual environment is used along with Docker for the ability to deploy quickly,
+        seamlessly and efficiently.</p>
+    <p>Overall the project utilises four main components:</p>
+    <ul>
+        <li>Django Web and Rest Framework</li>
+        <li>Pipenv</li>
+        <li>Docker</li>
+        <li>Python</li>
+    </ul>
+    <h1 id="features">Features</h1>
+    <p>SIEMEz allows for the quick deployment and integration of log files to allow for quick security analysis but also
+        extending to the easy integration of machine learning models.</p>
+    <h1 id="tests">Tests</h1>
+    <p>To run the testsuite within django deploy the project via pipenv or docker then use the following command:</p>
+    <pre><code class="lang-python"><span class="hljs-keyword">run</span><span class="bash"> python manage.py <span class="hljs-built_in">test</span></span>
+</code></pre>
+    <h1 id="license">License</h1>
+    <p>This project is ment to be flexible and easy to integrate but allowing others to use and adapt to their needs.
+        While this is the case, any changes to the project should be open and discussed to better the security
+        community.</p>
+    <h1 id="contribution">Contribution</h1>
+    <p>To help out with SIEMEz contact me at: contribute@siemez.io</p>
+
+
+</div>
 {% endblock content%}
