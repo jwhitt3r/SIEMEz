@@ -13,18 +13,20 @@ class EventListView(LoginRequiredMixin, ListView):
     template_name = 'siem/event.html'
     context_object_name = 'event_list'
     login_url = 'account_login'
+    paginate_by = 25
+    ordering = ['-receivedat']
 
 class SearchEventResultsListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'siem/search_event.html'
     context_object_name = 'event_list'
     login_url = 'account_login'
-
+    paginate_by = 25
     def get_queryset(self):
         hostname = self.request.GET.get('hostname')
         return Event.objects.filter(
             Q(fromhost__icontains=hostname)
-        )
+        ).order_by('-receivedat')
     
 
 
