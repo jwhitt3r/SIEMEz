@@ -23,15 +23,26 @@ These will be added as the project progresses.
 The core of SIEMEz is the Django framework, with its maturity in the web development world, coupled with the flexibility of Python, allows anyone to extend SIEMEz.
 In addition, the pipenv virtual environment is used along with Docker for the ability to deploy quickly, seamlessly and efficiently.
 
-Overall the project utilises four main components:
+Overall the project utilises five main components:
 * Django Web and Rest Framework
 * Pipenv
 * Docker
 * Python
+* Rsyslog
 
 # Features
 SIEMEz allows for the quick deployment and integration of log files to allow for quick security analysis but also extending to the easy integration of machine learning models.
 
+# Rsyslog Intergration
+To allow the database to ingest rsyslog data, the following template can be placed within the /etc/rsyslog.conf file
+
+```bash
+template(name="siemez" type="string" option.sql"on"
+        string="insert into siem_event (receivedat, devicereportedtime, facility, priority, fromhost, fromhostip, message, infounitid, syslogtag) values ( '%timegenerated:::date-pgsql%', '%timereported:::date-pgsql%', %syslogfacility%', %syslogpriority%', '%HOSTNAME%', '%fromhost-ip%', '%msg%', '%uit%', '%syslogtag'%)
+        )
+module(load="ompgsql")
+action(type="ompgsql" server="DB DOCKER IP" user="postgres" db="postgres", template="siemez")
+```
 # Tests
 
 To run the testsuite within django deploy the project via pipenv or docker then use the following command:

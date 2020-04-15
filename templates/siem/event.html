@@ -67,15 +67,7 @@
                             <p>{{ event.syslogtag }}</p>
                             <p>Facility: {{ event.facility }}</p>
                             <p>Priority {{ event.priority }}</p>
-                            {% if event.eventbinary %}
-                            <h5>Binary</h5>
-                            <hr class="my-1">
-                            <p>{{ event.eventbinary }}</p>
-                            {% else %}
-                            <h5>Binary</h5>
-                            <hr class="my-1">
-                            <p>No Associating Binary</p>
-                            {% endif %}
+
                         </div>
                     </div>
                 </div>
