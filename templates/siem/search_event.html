@@ -50,7 +50,15 @@
 
                         <div id="collapse{{ event.id }}" class="collapse " aria-labelledby="headingOne">
                             <div class="card-body">
-                                {{ event.message }}
+                                <h5>Message</h5>
+                                <hr class="my-1">
+                                <p>{{ event.message }}</p>
+                                <h5>Meta Data</h5>
+                                <hr class="my-1">
+                                <p>{{ event.syslogtag }}</p>
+                                <p>Facility: {{ event.facility }}</p>
+                                <p>Priority {{ event.priority }}</p>
+    
                             </div>
                         </div>
                     </div>
