@@ -33,7 +33,7 @@ class SearchEventResultsListView(LoginRequiredMixin, ListView):
             ('facility', 'facility__icontains'),
             ('priority', 'priority__icontains'),
             ('syslogtag', 'syslogtag__icontains'),
-            ('message', 'messasge__icontains'),
+            ('message', 'message__icontains'),
             ('ip', 'fromhostip__icontains'),
             )
         query_filter = Q() # initialize
