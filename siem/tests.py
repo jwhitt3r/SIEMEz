@@ -69,6 +69,16 @@ class EventpageTests(TestCase):
         self.assertContains(response, 'testmachine')
         self.assertTemplateUsed('siem/event.html')
 
+    def test_event_list_view_for_content(self):
+        self.client.login(email='reviewuser@email.com', password='testpass123')
+        self.response = self.client.get(reverse('search_event'))
+        self.assertEqual(self.response.status_code, 200)
+        self.assertContains(self.response, 'testmachine')
+        self.assertContains(self.response, '1')
+        self.assertContains(self.response, '3')
+        self.assertContains(self.response, '127.0.0.1')
+        self.assertContains(self.response, 'this is a test message')
+        self.assertContains(self.response, 'testtag')
 
     def test_event_list_view_for_logged_out_user(self):
         self.client.logout()
@@ -78,7 +88,7 @@ class EventpageTests(TestCase):
         response = self.client.get('%s?next=/event/' % (reverse("account_login")))
         self.assertContains(response, 'Log In')
 
-    def test_searchevent_url_resolves_searchevent(self):
+    def test_event_url_resolves_event(self):
         view = resolve('/event/')
         self.assertEqual(
             view.func.__name__,
@@ -112,12 +122,13 @@ class TestSearchView(TestCase):
         self.assertContains(self.response, 'Return to Events')
         self.assertNotContains(self.response, 'This should not be on the search events page.')
 
-    def test_event_list_view_for_logged_in_user(self):
+    def test_searchevent_list_view_for_logged_in_user(self):
         self.response = self.client.get(reverse('search_event'), data={'hostname': self.event.fromhost, 'start': self.event.receivedat, 'end': self.event.receivedat, 'facility': self.event.facility, 'priority':self.event.priority, 'fromhostip': self.event.fromhostip, 'message': self.event.message, 'infounitid': self.event.infounitid, 'syslogtag': self.event.syslogtag})
         self.assertEqual(self.response.status_code, 200)
         self.assertContains(self.response, 'testmachine')
         self.assertContains(self.response, '1')
         self.assertContains(self.response, '3')
+        self.assertContains(self.response, '127.0.0.1')
         self.assertContains(self.response, 'this is a test message')
         self.assertContains(self.response, 'testtag')
 

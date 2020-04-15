@@ -81,13 +81,16 @@
                             <button class="btn btn-link" type="button" data-toggle="collapse"
                                 data-target="#collapse{{ event.id }}" aria-expanded="false"
                                 aria-controls="collapse{{ event.id }}">
-                                {{ event.receivedat }} - {{ event.fromhost }}
+                                {{ event.receivedat }} ~ {{ event.fromhost }}
                             </button>
                         </h2>
                     </div>
 
                     <div id="collapse{{ event.id }}" class="collapse " aria-labelledby="headingOne">
                         <div class="card-body">
+                            <h5>IP Address: </h5>
+                            <hr class="my-1">
+                            <p>{{ event.fromhostip }}</p>
                             <h5>Message</h5>
                             <hr class="my-1">
                             <p>{{ event.message }}</p>
