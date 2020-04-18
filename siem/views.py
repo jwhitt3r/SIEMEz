@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from psycopg2.extras import DateTimeTZRange
 
 from .models import Event
 

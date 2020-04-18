@@ -9,7 +9,7 @@ services:
       - ENVIRONMENT=development
       - SECRET_KEY='if==ln-j0afenv#84)5^-4lj-h=5avw09s&xj38*l8%ksyjx#i'
       - DEBUG=1
-    #   - EMAIL_HOST_PASSWORD=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
+      - EMAIL_HOST_PASSWORD=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
     volumes:
       - .:/code
     ports:
