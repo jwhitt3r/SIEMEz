@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
 from .models import Event
 
 class HomePageView(TemplateView):
@@ -56,3 +57,15 @@ class SearchEventResultsListView(LoginRequiredMixin, ListView):
     
 
 
+
+class CreateApiTokenList(LoginRequiredMixin, TemplateView):
+    context_object_name = 'user_list'
+    login_url = 'account_login'
+    template_name = 'siem/api_token.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateApiTokenList, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['user_token'] = Token.objects.get_or_create(user=self.request.user)
+        return context
+    

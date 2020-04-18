@@ -41,13 +41,28 @@ INSTALLED_APPS = [
 
     # Third-Party
     'crispy_forms',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     'allauth',
     'allauth.account',
+    'drf_yasg',
 
     # Local
     'users.apps.UsersConfig',
     'siem.apps.SiemConfig',
+    'api.apps.ApiConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

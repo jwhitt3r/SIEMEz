@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+
+{% block title %} API Token {% endblock title%}
+
+{% block content %}
+<div class="jumbotron">
+<h1 class="display-4">Your Generated API Token</h1>
+<hr class="my-1">
+{% for key in user_token %}
+{% if forloop.first %}
+    <h5 class="display-5">API Token: {{ key }}</h5>
+{% endif %}
+{% endfor %}
+
+<p>For further information regarding the API please consult the <a href="{% url 'schema-swagger-ui' %}"> documentation</a></p>
+</div>
+{% endblock content %}

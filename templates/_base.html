@@ -28,7 +28,7 @@
             <a class="nav-link text-white" href="#">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">API</a>
+            <a class="nav-link text-white" href="{% url 'api'%}">API</a>
           </li>
           <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -36,11 +36,10 @@
               Account
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Get API Token</a>
+              <a class="dropdown-item" href="{% url 'api_token' %}">Get API Token</a>
               <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
               <a class="dropdown-item" href="{% url 'account_email' %}">Manage Email</a>
               <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-
             </div>
           </li>
           {% else %}
@@ -51,8 +50,16 @@
             <a class="nav-link btn btn-primary text-white" href="{% url 'account_signup' %}">Signup</a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://github.com/jwhitt3r/SIEMEz">Documentation</a>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Documentation
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'schema-swagger-ui' %}">API Docs</a>
+              <a class="dropdown-item" href="https://github.com/jwhitt3r/SIEMEz">Github</a>
+              <a class="dropdown-item" href="https://github.com/jwhitt3r/SIEMEz/blob/master/LICENSE.md">License</a>
+            </div>
           </li>
         </ul>
       </div>

@@ -2,8 +2,9 @@ from django.test import SimpleTestCase, TestCase, Client
 from django.urls import reverse, resolve
 from django.contrib.auth import get_user_model
 import datetime
-from .views import HomePageView, SearchEventResultsListView, EventListView
+from .views import HomePageView, SearchEventResultsListView, EventListView, CreateApiTokenList
 from .models import Event
+from rest_framework.authtoken.models import Token
 
 class HomepageTests(SimpleTestCase):
 
@@ -139,3 +140,34 @@ class TestSearchView(TestCase):
             SearchEventResultsListView.as_view().__name__
         )
 
+
+class testAPIToken(TestCase):
+        def setUp(self):
+            self.response = self.response = self.client.get(reverse('api_token'))
+            self.user = get_user_model().objects.create_user(
+                username='reviewuser',
+                email='reviewuser@email.com',
+                password='testpass123'
+            )
+            self.token = Token.objects.get_or_create(user=self.user)
+            self.client.login(email='reviewuser@email.com', password='testpass123')
+            
+        def test_api_token_url_resolve(self):
+            view = resolve('/api_token/')
+            self.assertEqual(
+                view.func.__name__,
+                CreateApiTokenList.as_view().__name__
+        )
+
+        def test_api_creation(self):
+            self.response = self.client.get(reverse('api_token'))
+            self.assertContains(self.response, self.token[0])
+        
+        def test_api_template(self):
+            self.response = self.client.get(reverse('api_token'))
+            self.assertTemplateUsed(self.response, 'siem/api_token.html')
+
+        def test_api_does_not_contain(self):
+            self.response = self.client.get(reverse('api_token'))
+            self.assertNotContains(
+                self.response, 'Hi there! I should not be on the page.')

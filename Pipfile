@@ -11,7 +11,10 @@ django = "*"
 psycopg2 = "*"
 django-crispy-forms = "*"
 django-allauth = "*"
-
+djangorestframework = "*"
+django-rest-auth = "*"
+pyyaml = "*"
+drf-yasg = "*"
 
 [requires]
 python_version = "3.8"
