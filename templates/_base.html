@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}SIEMEz{% endblock title %}</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light p-3 px-md-4 mb-3" style="background-color: #003c64;">
+      <a class="navbar-brand text-white" href="{% url 'home' %}">SIEMEz</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'case_list' %}">Cases<span
+                class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'event' %}">Event Viewer<span
+                class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url "event_dashboard" %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'api'%}">API</a>
+          </li>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'api_token' %}">Get API Token</a>
+              <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
+              <a class="dropdown-item" href="{% url 'account_email' %}">Manage Email</a>
+              <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'account_login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white" href="{% url 'account_signup' %}">Signup</a>
+          </li>
+          {% endif %}
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Documentation
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'schema-swagger-ui' %}">API Docs</a>
+              <a class="dropdown-item" href="https://github.com/jwhitt3r/SIEMEz">Github</a>
+              <a class="dropdown-item" href="https://github.com/jwhitt3r/SIEMEz/blob/master/LICENSE.md">License</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</head>
+
+<body>
+  <div class="container">
+    {% block content %}
+    {% endblock content %}
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  
+</body>
+<hr class="my-4">
+<footer align="center">
+  <div class="navbar-text ">
+    &copy; SIEMEz, 2021
+  </div>
+</footer>
+
+</html>

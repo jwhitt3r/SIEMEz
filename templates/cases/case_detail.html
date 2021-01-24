@@ -1,0 +1,61 @@
+{% extends '_base.html' %}
+
+{% block title %} {{case_list.case_name}} {% endblock title%}
+
+{% block content %}
+
+<div class="jumbotron">
+<h1 class="display-4">{{case_list.case_name | title}}</h1>
+</br>
+<a class="btn btn-success" href="{% url 'case_edit' case_list.pk %}">Update Case</a>
+<a class="btn btn-danger" href="{% url 'case_delete' case_list.pk %}">Delete Case</a>
+
+<hr class="my-4">
+
+<h2 class="display-6">Notes</h2>
+<p>{{case_list.case_notes}}</p>
+</div>
+<hr class="my-4">
+<h2 class="display-6">Selected Events</h2>
+{% for case in case_list.connect_events.all %}
+<div class="w-100">
+    <div class="row">
+        <div class="col">
+            <div class="accordion" id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                data-target="#collapse{{ case.id }}" aria-expanded="false"
+                                aria-controls="collapse{{ case.id }}">
+                                Event ID:- {{case.pk}} [{{ case.receivedat }} ~ {{ case.fromhost }}]
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapse{{ case.id }}" class="collapse " aria-labelledby="headingOne">
+                        <div class="card-body">
+                            <h5>IP Address: </h5>
+                            <hr class="my-1">
+                            <p>{{ case.fromhostip }}</p>
+                            <h5>Message</h5>
+                            <hr class="my-1">
+                            <p>{{ case.message }}</p>
+                            <h5>Meta Data</h5>
+                            <hr class="my-1">
+                            <p>{{ case.syslogtag }}</p>
+                            <p>Facility: {{ case.facility }}</p>
+                            <p>Priority {{ case.priority }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+    <p>No Events Have Been Selected.</p>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %} Cases {% endblock title%}
+
+{% block content %}
+<div class="jumbotron">
+<h1 class="display-4">Incident Cases</h1>
+</br>
+<a class="btn btn-success" href="{% url 'case_new' %}">Create New Case</a>
+
+<hr class="my-4">
+{% for case in case_list %}
+    <p><a href="{% url 'case_detail' case.pk %}">{{ case.date_created }} - {{ case.case_name | title }}</a></p>
+{% empty %}
+    <p>No Cases Have Been Made.</p>
+{% endfor %}
+</div>
+{% endblock content %}

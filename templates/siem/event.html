@@ -1,0 +1,113 @@
+{% extends '_base.html' %}
+
+{% block title %}Event View{% endblock title%}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Search Events</h1>
+    <hr class="my-4">
+    <p>Showing {{event_list.count}} of {{ paginator.count }} Search Events</p>
+    <form action="{% url "search_event" %}" method="GET">
+        <div class="row">
+            <div class="col">
+                <label for="start">Start Date</label>
+                <input name="start" class="form-control" type="datetime-local" placeholder="Search" aria-label="Search"
+                    id="start">
+                <label for="hostname">Search Host</label>
+                <input name="hostname" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="hostname">
+                <label for="ip">Search IP</label>
+                <input name="ip" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="ip">
+                <label for="message">Search Message</label>
+                <input name="message" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="message">
+            </div>
+            <div class="col">
+                <label for="end">End Date</label>
+                <input name="end" class="form-control" type="datetime-local" placeholder="Search" aria-label="Search"
+                    id="end">
+                <label for="facility">Search Facility</label>
+                <input name="facility" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="facility">
+                <label for="priority">Search Priority</label>
+                <input name="priority" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="priority">
+                <label for="syslogtag">Search Syslog Tag</label>
+                <input name="syslogtag" class="form-control" type="text" placeholder="Search" aria-label="Search"
+                    id="syslogtag">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <input class="btn btn-success" type="submit" value="Submit">
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<nav aria-label="page navigation">
+    <div class="pagination">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1 &hostname={{ query }}">&laquo; first</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}&hostname={{ query }}">previous</a></li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.next_page_number }}&hostname={{ query }}">next</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.paginator.num_pages }}&hostname={{ query }}">last
+                    &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% for event in page_obj %}
+<div class="w-100">
+    <div class="row">
+        <div class="col">
+            <div class="accordion" id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                data-target="#collapse{{ event.id }}" aria-expanded="false"
+                                aria-controls="collapse{{ event.id }}">
+                                Event ID:- {{event.pk}} [{{ event.receivedat }} ~ {{ event.fromhost }}]
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapse{{ event.id }}" class="collapse " aria-labelledby="headingOne">
+                        <div class="card-body">
+                            <h5>IP Address: </h5>
+                            <hr class="my-1">
+                            <p>{{ event.fromhostip }}</p>
+                            <h5>Message</h5>
+                            <hr class="my-1">
+                            <p>{{ event.message }}</p>
+                            <h5>Meta Data</h5>
+                            <hr class="my-1">
+                            <p>{{ event.syslogtag }}</p>
+                            <p>Facility: {{ event.facility }}</p>
+                            <p>Priority {{ event.priority }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock content %}

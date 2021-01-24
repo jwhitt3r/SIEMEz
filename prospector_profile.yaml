@@ -1,0 +1,9 @@
+output-format: json
+
+strictness: low
+doc-warnings: false
+
+ignore-paths:
+  - docs
+  - manage.py
+  - migrations

@@ -1,0 +1,325 @@
+{% extends '_base.html' %}
+{% block title %} Event Dashboard {% endblock title%}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+<script>
+    Chart.defaults.global.defaultFontStyle = 'Bold'
+</script>
+<div class="jumbotron">
+    <h1 class="display-4">Event Overview</h1>
+    <hr class="my-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 py-1">
+                <canvas id="fromhostip" width="200" height="200"></canvas>
+                <script>
+                var ctx = document.getElementById('fromhostip');
+                var c = document.getElementById("fromhostip");
+                var ctx = c.getContext("2d");
+                var gradient = ctx.createLinearGradient(500, 0, 100, 170);
+
+                gradient.addColorStop(0, "#4db8ff");
+                gradient.addColorStop(1, "#003c64");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(20, 20, 150, 100);
+                var fromhostip = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for labels in ip_labels %}'{{ labels }}',{% endfor %}],
+                        datasets: [{
+                            label: "Event Total",
+                            data: [{% for data in ip_data %}{{ data }},{% endfor %}],
+                            backgroundColor: gradient, 
+                        }]
+                    },
+                    options: {
+                        legend:{
+                            display: false,
+                        },
+                        scaleShowValues: true,
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    autoSkip: false,
+                                },
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'Host IP',
+                                },
+                                gridLines:{
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'Number of Events',
+                                },
+                            
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 20,
+                            }
+                        }
+                    }
+
+                });
+                </script>
+            </div>
+            <div class="col-md-6 py-2">
+                <canvas id="fromhost" width="200" height="200"></canvas>
+                <script>
+                var ctx = document.getElementById('fromhost');
+                var c = document.getElementById("fromhost");
+                var ctx = c.getContext("2d");
+                var gradient = ctx.createLinearGradient(500, 0, 100, 170);
+                
+                gradient.addColorStop(0, "#4db8ff");
+                gradient.addColorStop(1, "#003c64");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(20, 20, 150, 100);
+                var fromhost = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for labels in fromhost_labels %}'{{ labels }}',{% endfor %}],
+                        datasets: [{
+                            label: "Event Total",
+                            data: [{% for data in fromhost_data %}{{ data }},{% endfor %}],
+                            backgroundColor: gradient,  
+                        }]
+                    },
+                    options: {
+                        legend:{
+                            display: false,
+                        },
+                        scaleShowValues: true,
+                        
+                        scales: {
+                        xAxes: [{
+                            ticks: {
+                            autoSkip: false
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Number of Events',
+                            },
+                            gridLines:{
+                                display: true,
+                            }
+                        }],
+                            yAxes: [{
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'Host Name',
+                                },
+                                gridLines:{
+                                    display: false,
+                                }
+                                
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 20,
+                            }
+                        }
+                    }
+                
+                });
+                </script>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 py-1">
+                <canvas id="facility" width="100" height="100"></canvas>
+                <script>
+                var ctx = document.getElementById('facility');
+                var c = document.getElementById("facility");
+                var ctx = c.getContext("2d");
+                var gradient = ctx.createLinearGradient(500, 0, 100, 170);
+
+                gradient.addColorStop(0, "#4db8ff");
+                gradient.addColorStop(1, "#003c64");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(20, 20, 150, 100);
+                var facility = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for labels in facility_labels %}'{{ labels }}',{% endfor %}],
+                        datasets: [{
+                            label: "Event Total",
+                            data: [{% for data in facility_data %}{{ data }},{% endfor %}],
+                            backgroundColor: gradient,  
+                        }]
+                    },
+                    options: {
+                        legend:{
+                            display: false,
+                        },
+                        scaleShowValues: true,
+                        scales: {
+                        xAxes: [{
+                            ticks: {
+                            autoSkip: false
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Facility Number',
+                            },
+                            gridLines:{
+                                display: false,
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Number of Events',
+                            },
+                        
+                        }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 20,
+                            }
+                        }
+                    }
+                
+                });
+                </script>
+            </div>
+            <div class="col-md-6 py-1">
+                <canvas id="priority" width="100" height="100"></canvas>
+                <script>
+                var ctx = document.getElementById('priority');
+                var c = document.getElementById("priority");
+                var ctx = c.getContext("2d");
+                var gradient = ctx.createLinearGradient(500, 0, 100, 170);
+
+                gradient.addColorStop(0, "#4db8ff");
+                gradient.addColorStop(1, "#003c64");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(20, 20, 150, 100);
+                var priority = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for labels in priority_labels %}'{{ labels }}',{% endfor %}],
+                        datasets: [{
+                            label: "Event Total",
+                            data: [{% for data in priority_data %}{{ data }},{% endfor %}],
+                            backgroundColor: gradient,  
+                        }]
+                    },
+                    options: {
+                        legend:{
+                            display: false,
+                        },
+                        scaleShowValues: true,
+                        
+                        scales: {
+                        xAxes: [{
+                            ticks: {
+                            autoSkip: false
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Priority Number',
+                            },
+                            gridLines:{
+                                display: false,
+                            }
+                        }],
+                            yAxes: [{
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'Number of Events',
+                                },
+                                
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 20,
+                            }
+                        }
+                    }
+
+                });
+                </script>
+            </div>
+
+            <div class="col py-1">
+                <canvas id="syslogtag" width="100" height="100"></canvas>
+                <script>
+                    var ctx = document.getElementById('syslogtag');
+                    var c = document.getElementById("syslogtag");
+                    var ctx = c.getContext("2d");
+                    var gradient = ctx.createLinearGradient(500, 0, 100, 170);
+                
+                    gradient.addColorStop(0, "#4db8ff");
+                    gradient.addColorStop(1, "#003c64");
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(20, 20, 150, 100);
+                    var syslogtag = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [{% for labels in syslogtag_labels %}'{{ labels }}',{% endfor %}],
+                            datasets: [{
+                                label: "Event Total",
+                                data: [{% for data in syslogtag_data %}{{ data }},{% endfor %}],
+                                backgroundColor: gradient,  
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false,
+                            },
+                            scaleShowValues: true,
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                autoSkip: false
+                                },
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'SyslogTag',
+                                },
+                                gridLines:{
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                scaleLabel:{
+                                    display: true,
+                                    labelString: 'Number of Events',
+                                },
+                            }]
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 0,
+                                    top: 30,
+                                }
+                            }
+                        }
+                
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
