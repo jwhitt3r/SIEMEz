@@ -39,7 +39,7 @@ SIEMEz allows for the quick deployment and integration of log files to allow for
 This project is ment to be flexible and easy to integrate but allowing others to use and adapt to their needs. While this is the case, any changes to the project should be open and discussed to better the security community.
 
 # Contribution
-To help out with SIEMEz contact me at: contribute@siemez.io
+To help out with SIEMEz contact me at: contribute_siemez@exit.wtf
 Follow me on [Twitter](https://twitter.com/Jack_WJ)
 
 # Screenshots
